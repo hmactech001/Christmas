@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merry Christmas! 私の自己紹介</title>
+  <style>
+    /* ==============================================
+       クリスマス テーマ定義 & 基本スタイル
+       ============================================== */
+    :root {
+      --xmas-red: #c0392b;
+      --xmas-dark-red: #8e1c10;
+      --xmas-green: #1b4d3e;
+      --xmas-light-green: #27ae60;
+      --xmas-gold: #f39c12;
+      --xmas-cream: #fbf9f1;
+      --xmas-white: #ffffff;
+      --text-color: #2c3e50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 背景の雪アニメーション */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: #fff;
+      font-size: 1em;
+      opacity: 0.8;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+      }
+    }
+
+    /* ==============================================
+       メインカードエリア
+       ============================================== */
+    .container {
+      width: 100%;
+      max-width: 550px;
+      background: var(--xmas-cream);
+      border-radius: 24px;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(243, 156, 18, 0.3);
+      border: 8px solid var(--xmas-red);
+      overflow: hidden;
+    }
+
+    /* キャンディケイン風のリボン枠線 */
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--xmas-red),
+        var(--xmas-red) 15px,
+        var(--xmas-white) 15px,
+        var(--xmas-white) 30px
+      );
+    }
+
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(180deg, var(--xmas-green) 0%, #113429 100%);
+      color: var(--xmas-white);
+      text-align: center;
+      padding: 40px 20px 30px;
+      position: relative;
+    }
+
+    .header-title {
+      font-size: 1.2rem;
+      color: var(--xmas-gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    /* 丸型画像アイコン挿入エリア */
+    .avatar-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 15px auto 10px;
+    }
+
+    .avatar-wrapper {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 5px solid var(--xmas-gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      overflow: hidden;
+      background: var(--xmas-white);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-wrapper:hover {
+      transform: scale(1.03);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 4px 0;
+      pointer-events: none;
+    }
+
+    /* リース装飾の絵文字 */
+    .wreath-icon {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    /* ニックネーム表示 */
+    .nickname {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-top: 10px;
+      color: var(--xmas-white);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    /* メインコンテンツ本体 */
+    .content {
+      padding: 30px 25px;
+    }
+
+    /* 各コンテンツセクション */
+    .section-card {
+      background: var(--xmas-white);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-left: 6px solid var(--xmas-green);
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .section-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .section-card.red-theme {
+      border-left-color: var(--xmas-red);
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: var(--xmas-green);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .section-card.red-theme .section-title {
+      color: var(--xmas-red);
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    /* フッター飾り */
+    .footer {
+      text-align: center;
+      padding-bottom: 20px;
+      color: var(--xmas-dark-red);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    /* 非表示のファイル入力 */
+    #file-input {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- メインカード -->
+  <div class="container">
+    <div class="header">
+      <div class="header-title">🎄 Merry Christmas 🎄</div>
+
+      <!-- 丸型画像エリア（クリックで写真選択可能） -->
+      <div class="avatar-container">
+        <div class="avatar-wrapper" onclick="document.getElementById('file-input').click()">
+          <!-- 初期サンプル画像（プレースホルダー） -->
+          <img id="avatar-preview" class="avatar-img" src="https://via.placeholder.com/150/1b4d3e/FFFFFF?text=Click+Image" alt="プロフィール画像">
+          <div class="avatar-hint">画像を変更</div>
+        </div>
+        <div class="wreath-icon">🎀</div>
+      </div>
+      <input type="file" id="file-input" accept="image/*" onchange="loadAvatar(event)">
+
+      <!-- ニックネーム -->
+      <div class="nickname">サンタの弟子</div>
+    </div>
+
+    <div class="content">
+      <!-- 好きな●● -->
+      <div class="section-card">
+        <div class="section-title">
+          <span>🎁</span> 好きな〇〇（食べ物・趣味）
+        </div>
+        <div class="section-body">
+          ローストチキンと温かいフライドチキン、そしてクリスマスケーキが大好きです！冬の夜に温かいココアを飲みながらクリスマス映画を観る時間が至福のひとときです。
+        </div>
+      </div>
+
+      <!-- ひとまちでの思い出 -->
+      <div class="section-card red-theme">
+        <div class="section-title">
+          <span>🏘️</span> ひとまちでの思い出
+        </div>
+        <div class="section-body">
+          みんなで集まってワークショップをやった日のことが一番の思い出です！地域の人たちと温かい雰囲気の中で交流でき、日常を忘れて楽しむことができました。
+        </div>
+      </div>
+
+      <!-- クリスマスの要素（メッセージ・企画など） -->
+      <div class="section-card">
+        <div class="section-title">
+          <span>✨</span> 今年のクリスマス・願いごと
+        </div>
+        <div class="section-body">
+          今年の冬もたくさんの笑顔があふれる素敵なシーズンになりますように！年末に向けて「ひとまち」でも楽しい企画を計画中です🎄
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      🎅 Happy Holidays & Best Wishes! 🎅
+    </div>
+  </div>
+
+  <script>
+    // 画像ファイルを読み込んで丸型プレビューに反映するJavaScript
+    function loadAvatar(event) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        const output = document.getElementById('avatar-preview');
+        output.src = reader.result;
+      };
+      if(event.target.files[0]){
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    }
+
+    // 画面上に雪を振らせるJavaScriptエフェクト
+    function createSnowflakes() {
+      const snowCount = 30;
+      for (let i = 0; i < snowCount; i++) {
+        const flake = document.createElement('div');
+        flake.className = 'snowflake';
+        flake.innerHTML = '❄';
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.animationDuration = (Math.random() * 3 + 4) + 's'; // 4〜7秒で落下
+        flake.style.animationDelay = Math.random() * 5 + 's';
+        flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+        flake.style.opacity = Math.random() * 0.7 + 0.3;
+        document.body.appendChild(flake);
+      }
+    }
+    createSnowflakes();
+  </script>
+</body>
+</html>
